@@ -1,5 +1,7 @@
 package com.example.tic_tac_toe
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -7,10 +9,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tic_tac_toe.databinding.ActivityGame3x3Binding
 
-class Game_3x3 : AppCompatActivity(), View.OnClickListener  {
+abstract class Game_3x3 : AppCompatActivity(), View.OnClickListener  {
     private lateinit var binding3: ActivityGame3x3Binding
     var gameCounter = 0 // x-even, o-odd
     val gameField = Array<String>(9){i->""}
+    //abstract var endG: EndGame;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_3x3)
@@ -50,11 +53,13 @@ class Game_3x3 : AppCompatActivity(), View.OnClickListener  {
             R.id.button9 -> {findViewById<Button>(R.id.button9).text = str;findViewById<Button>(R.id.button9).isEnabled = false;gameField[8]=str}
         }
         //val winState = checkWin()
-        val endG = checkWin()
+        var endG = checkWin()
         //if(winState=="x" || winState=="o"){
         if(endG.winState=="x"|| endG.winState=="o"){
             findViewById<TextView>(R.id.playerBottomView).visibility = View.VISIBLE
             findViewById<TextView>(R.id.playerTopView).visibility = View.VISIBLE
+            findViewById<Button>(R.id.returnToMenu).visibility = View.VISIBLE
+            //findViewById<TextView>(R.id.lastWinner).text = "x won"
 
             findViewById<Button>(R.id.button1).isEnabled = false
             findViewById<Button>(R.id.button2).isEnabled = false
@@ -104,6 +109,7 @@ class Game_3x3 : AppCompatActivity(), View.OnClickListener  {
             }
         }
         else if(endG.winState=="d" && gameCounter==9){
+            findViewById<Button>(R.id.returnToMenu).visibility = View.VISIBLE
             findViewById<TextView>(R.id.playerBottomView).visibility = View.VISIBLE
             findViewById<TextView>(R.id.playerTopView).visibility = View.VISIBLE
 
@@ -198,6 +204,27 @@ class Game_3x3 : AppCompatActivity(), View.OnClickListener  {
         }
         ret = EndGame("d",colorize)
         return ret
+    }
+
+    fun returnToMenuButton(view: View) {
+
+        val stringBack:String
+        //if(endG.winState=="x"){
+        if(true){
+            findViewById<TextView>(R.id.lastWinner).text = "Result of the last game:\nX won!"
+            stringBack = "X won!"
+        }
+        else if(false){
+        //else if(endG.winState=="o"){
+            stringBack = "O won!"
+        }
+        else{
+            stringBack = "Draw!"
+        }
+        //val intent = Intent()
+        //intent.putExtra("keyName", stringBack)
+        //setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
 
