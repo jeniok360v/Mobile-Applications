@@ -9,11 +9,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tic_tac_toe.databinding.ActivityGame3x3Binding
 
-abstract class Game_3x3 : AppCompatActivity(), View.OnClickListener  {
-    private lateinit var binding3: ActivityGame3x3Binding
+class Game_3x3 : AppCompatActivity(), View.OnClickListener  {
+    //private lateinit var binding3: ActivityGame3x3Binding
     var gameCounter = 0 // x-even, o-odd
     val gameField = Array<String>(9){i->""}
-    //abstract var endG: EndGame;
+    lateinit var endG: EndGame;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_3x3)
@@ -52,14 +52,11 @@ abstract class Game_3x3 : AppCompatActivity(), View.OnClickListener  {
             R.id.button8 -> {findViewById<Button>(R.id.button8).text = str;findViewById<Button>(R.id.button8).isEnabled = false;gameField[7]=str}
             R.id.button9 -> {findViewById<Button>(R.id.button9).text = str;findViewById<Button>(R.id.button9).isEnabled = false;gameField[8]=str}
         }
-        //val winState = checkWin()
-        var endG = checkWin()
-        //if(winState=="x" || winState=="o"){
+        endG = checkWin()
         if(endG.winState=="x"|| endG.winState=="o"){
             findViewById<TextView>(R.id.playerBottomView).visibility = View.VISIBLE
             findViewById<TextView>(R.id.playerTopView).visibility = View.VISIBLE
             findViewById<Button>(R.id.returnToMenu).visibility = View.VISIBLE
-            //findViewById<TextView>(R.id.lastWinner).text = "x won"
 
             findViewById<Button>(R.id.button1).isEnabled = false
             findViewById<Button>(R.id.button2).isEnabled = false
@@ -207,25 +204,21 @@ abstract class Game_3x3 : AppCompatActivity(), View.OnClickListener  {
     }
 
     fun returnToMenuButton(view: View) {
-
-        val stringBack:String
-        //if(endG.winState=="x"){
-        if(true){
-            findViewById<TextView>(R.id.lastWinner).text = "Result of the last game:\nX won!"
+        val stringBack:String?
+        if(endG.winState=="x"){
             stringBack = "X won!"
         }
-        else if(false){
-        //else if(endG.winState=="o"){
+        else if(endG.winState=="o"){
             stringBack = "O won!"
         }
         else{
             stringBack = "Draw!"
         }
-        //val intent = Intent()
-        //intent.putExtra("keyName", stringBack)
-        //setResult(Activity.RESULT_OK, intent)
+
+        val myIntent= Intent()
+        myIntent.putExtra("result3x3", stringBack)
+        setResult(Activity.RESULT_OK, myIntent)
+
         finish()
     }
-
-
 }

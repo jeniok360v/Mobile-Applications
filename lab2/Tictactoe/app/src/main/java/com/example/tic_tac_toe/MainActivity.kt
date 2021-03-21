@@ -1,13 +1,14 @@
 package com.example.tic_tac_toe
 
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
-    //private val SECOND_ACTIVITY_REQUEST_CODE = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,33 +17,33 @@ class MainActivity : AppCompatActivity() {
 
     fun start3x3game(view: View) {
         val intent3x3 = Intent(this, Game_3x3::class.java)
-        startActivity(intent3x3)
-        //startActivityForResult(intent3x3, SECOND_ACTIVITY_REQUEST_CODE)
-    }/*
+        startActivityForResult(intent3x3, 3)
+    }
     fun start5x5game(view: View) {
         val intent5x5 = Intent(this, Game_5x5::class.java)
-        startActivityForResult(intent5x5, SECOND_ACTIVITY_REQUEST_CODE)
+        startActivityForResult(intent5x5, 5)
     }
-    */
-/*
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        // Check that it is the SecondActivity with an OK result
-        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == 3) {
             if (resultCode == Activity.RESULT_OK) {
-
-                // Get String data from Intent
-                val returnString = data!!.getStringExtra("keyName")
-
-                // Set text view with string
+                val returnString = data!!.getStringExtra("result3x3")
+                val textView = findViewById(R.id.lastWinner) as TextView
+                textView.text = "Result of the last game:\n" + returnString
+            }
+        }
+        if (requestCode == 5) {
+            if (resultCode == Activity.RESULT_OK) {
+                val returnString = data!!.getStringExtra("result5x5")
                 val textView = findViewById(R.id.lastWinner) as TextView
                 textView.text = "Result of the last game:\n" + returnString
             }
         }
     }
 
- */
+
 
 
 

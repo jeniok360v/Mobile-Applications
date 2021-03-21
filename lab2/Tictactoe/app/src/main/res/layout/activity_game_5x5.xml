@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Game_3x3">
+    tools:context=".Game_5x5">
 
     <Button
         android:id="@+id/button5_5"
@@ -200,7 +200,7 @@
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
-        android:id="@+id/playerTopView"
+        android:id="@+id/player5TopView"
         android:layout_width="197dp"
         android:layout_height="38dp"
         android:rotation="180"
@@ -320,7 +320,7 @@
         app:layout_constraintVertical_bias="0.6" />
 
     <TextView
-        android:id="@+id/playerBottomView"
+        android:id="@+id/player5BottomView"
         android:layout_width="197dp"
         android:layout_height="38dp"
         android:text="Your move!"
@@ -331,5 +331,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button5_18" />
+
+    <Button
+        android:id="@+id/returnToMenu5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="returnToMenuButton5"
+        android:text="Return to main menu"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.92" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
